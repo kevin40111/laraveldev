@@ -1,0 +1,22 @@
+on:
+  push
+
+name: 🚀 Verify Unitest
+jobs:
+  prepare:
+    name: 🎉 Verify Unitest
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          dev: no
+          args: --profile --ignore-platform-reqs
+
+      - uses: php-actions/phpunit@v2
+
+      - name: Run Unitest
+        run: phpunit -c phpunit.xml
